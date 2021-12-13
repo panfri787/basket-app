@@ -11,4 +11,9 @@ public class TeamDTO {
     private Integer pointsScored;
     private Integer pointsReceived;
     private Integer pointsDifference;
+
+    public TeamDTO calculatePointsDifference() {
+        this.setPointsDifference(this.getPointsScored() - this.getPointsReceived());
+        return this;
+    }
 }

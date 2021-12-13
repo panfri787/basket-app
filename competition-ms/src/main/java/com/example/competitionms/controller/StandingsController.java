@@ -28,18 +28,13 @@ public class StandingsController {
 
         List<TeamDTO> teamsDTOs = teams.stream()
                 .map(t -> modelMapper.map(t, TeamDTO.class))
+                .map(TeamDTO::calculatePointsDifference)
+                .sorted(Comparator.comparing(TeamDTO::getMatchesWon).reversed()
+                        .thenComparing(TeamDTO::getMatchesLost)
+                        .thenComparing(TeamDTO::getPointsDifference).reversed())
                 .collect(Collectors.toList());
 
-        for (TeamDTO dto :teamsDTOs) {
-            dto.setPointsDifference(dto.getPointsScored() - dto.getPointsReceived());
-        }
-
-        List<TeamDTO> standingList = teamsDTOs.stream().sorted(Comparator.comparing(TeamDTO::getMatchesWon).reversed()
-                .thenComparing(TeamDTO::getMatchesLost)
-                .thenComparing(TeamDTO::getPointsDifference).reversed())
-                .collect(Collectors.toList());
-
-        return ResponseEntity.ok(standingList);
+        return ResponseEntity.ok(teamsDTOs);
     }
 
 
