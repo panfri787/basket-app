@@ -1,8 +1,8 @@
-#Microservicios competicion baloncesto
+# Microservicios competicion baloncesto
 
 En el repo se encuentran dos proyectos SpringBoot que componen un ejemplo de una básica aquitectura de microservicios para gestionar una competicion de baloncesto.
 
-##Microservicio "partidos"
+## Microservicio "partidos"
 
 El primero de ellos es un microservicio orientado a la notificación de resultados de los arbitros cuando termina el partido. Para simplificar el ejemplo, se ha expuesto un controller que tiene un dos endpoints. El primero es un PUT a la ruta `/match/{id}` cuyo payload es el siguiente:
 
@@ -19,7 +19,7 @@ El segundo endpoint es un GET a la ruta `/matches` que puede llevar de forma opc
 
 Al arrancar el microservicio se cargan en memoria tres partidos con id: 1, 2 y 3.
 
-##Microservicio "competicion"
+## Microservicio "competicion"
 
 El objetivo de este microservicio el de gestionar la clasificacion y demas aspectos de una competicion. Contiene una entidad con la informacion de los equipos y un listener para recoger los eventos del microservicio de partidos.
 
@@ -29,7 +29,7 @@ Además, el microservicio expone un controlador que tiene un unico endpoint al p
 
 El microservicio provee un script que introduce en BBDD tres equipos al arrancarlo.
 
-##Instrucciones de arranque
+## Instrucciones de arranque
 
 Los microservicios se despliegan como cualquier aplicacion SpringBoot utilizando la goal del plugin de SpringBoot de Maven `spring-boot:run`. El microservicio de partidos se levanta en el puerto 8080 y el de competicion en el 8081.
 
@@ -37,7 +37,7 @@ Para el correcto funcionamiento de la aplicación, es necesario tener levantada 
 
 `docker run -d -p 5672:5672 -p 15672:15672 --name rabbit rabbitmq:3-management`
 
-##Consideraciones no realizadas por falta de tiempo
+## Consideraciones no realizadas por falta de tiempo
 
 Seria conveniente realizar test unitarios al controller y el servicio de equipos del microservicio de competicion porque tienen "logica" cuyo comportamiento seria verificado en un test unitario con mocks.
 
